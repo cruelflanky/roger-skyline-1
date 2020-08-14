@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# chmod +x .
 # Run with sudo.
 
 PRE_INFO="# "
@@ -22,12 +23,6 @@ err_exit () {
 pr () {
 	echo -e "${COLOR_INFO}${PRE_INFO}${1}${COLOR_RESET}"
 }
-
-pr_notice () {
-	echo -e "${COLOR_NOTICE}${PRE_INFO}${1}${COLOR_RESET}"
-}
-
-# Get all configurable values.
 source deploy.conf
 
 # Save the full path to this script.
@@ -47,16 +42,16 @@ echo
 # All the packages to install.
 declare -a pkgs=(
 "vim"
-"openssh-server" #Should be installed already, but just in case.
+"openssh-server"
 "net-tools"
 "ufw"
 "iptables"
 "fail2ban"
 "apache2"
-"portsentry" # Opens up an interactive screen (->ENTER).
-"bsd-mailx" # Not needed, but can be useful for testing (sending mails manually).
-"postfix" # Opens up an interactive screen.
-"mutt" # Terminal mail client for root.
+"portsentry"
+"bsd-mailx"
+"postfix"
+"mutt"
 )
 
 # Set these values to be pre-answered for these packages,
@@ -253,7 +248,5 @@ cp ${SRC_DIR}/responsive.css /var/www/html/ || err_exit "Failed to copy responsi
 echo
 
 pr "And finally..."
-sleep 2
-pr "Deploy the"
 sleep 2
 mkdir /var/www/html/img/ >/dev/null
