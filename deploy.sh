@@ -79,10 +79,15 @@ pr "Setting up static IP ${IP_ADDRESS} with netmask ${NETMASK}"
 cd /etc/network/
 chmod +w interfaces
 echo "# The primary network interface" >> interfaces
+echo "auto enp0s3" >> interfaces
+echo "# The secondary network interface" >> interfaces
 echo "auto enp0s8" >> interfaces
-echo "iface enp0s8 inet static" >> interfaces
-echo "    address ${IP_ADDRESS}" >> interfaces
-echo "    netmask ${NETMASK}" >> interfaces
+echo "iface enp0s3 inet dhcp" >> interfaces
+cd /etc/network/interfaces.d/
+touch enp0s3
+echo "iface enp0s3 inet static" >> enp0s3
+echo "    address ${IP_ADDRESS}" >> enp0s3
+echo "    netmask ${NETMASK}" >> enp0s3
 service networking restart || err "Failed to restart the networking service"
 echo
 
@@ -252,5 +257,3 @@ sleep 2
 pr "Deploy the"
 sleep 2
 mkdir /var/www/html/img/ >/dev/null
-cp ${SRC_DIR}/img/you.png /var/www/html/img/ || err_exit "Failed to copy you.png"
-echo
