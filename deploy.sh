@@ -73,14 +73,11 @@ done
 pr "Setting up static IP ${IP_ADDRESS} with netmask ${NETMASK}"
 cd /etc/network/
 chmod +w interfaces
-echo "# The primary network interface" >> interfaces
-echo "auto enp0s3" >> interfaces
 echo "# The secondary network interface" >> interfaces
 echo "auto enp0s8" >> interfaces
-echo "iface enp0s3 inet dhcp" >> interfaces
 cd /etc/network/interfaces.d/
-touch enp0s3
-echo "iface enp0s3 inet static" >> enp0s3
+touch enp0s8
+echo "iface enp0s8 inet static" >> enp0s3
 echo "    address ${IP_ADDRESS}" >> enp0s3
 echo "    netmask ${NETMASK}" >> enp0s3
 service networking restart || err "Failed to restart the networking service"
