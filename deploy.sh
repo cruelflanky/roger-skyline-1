@@ -77,9 +77,9 @@ echo "# The secondary network interface" >> interfaces
 echo "auto enp0s8" >> interfaces
 cd /etc/network/interfaces.d/
 touch enp0s8
-echo "iface enp0s8 inet static" >> enp0s3
-echo "    address ${IP_ADDRESS}" >> enp0s3
-echo "    netmask ${NETMASK}" >> enp0s3
+echo "iface enp0s8 inet static" >> enp0s8
+echo "    address ${IP_ADDRESS}" >> enp0s8
+echo "    netmask ${NETMASK}" >> enp0s8
 service networking restart || err "Failed to restart the networking service"
 echo
 
